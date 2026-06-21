@@ -1,15 +1,15 @@
 clearvars;
 clc;
 
-% =========================
+% -------------------------
 % FILES
-% =========================
+% -------------------------
 epoched_file = 'JD0802_epochedandcleanedwithICA.bdf.set';
 label_file   = 'JD0802_labels.mat';
 
-% =========================
+% -------------------------
 % LOAD CLEAN FULL EPOCHED DATASET
-% =========================
+% -------------------------
 EEG = pop_loadset('filename', epoched_file);
 
 EEG.icaact = [];
@@ -17,9 +17,9 @@ EEG = eeg_checkset(EEG);
 
 load(label_file, 'response_labels', 'condition_labels');
 
-% =========================
+% -------------------------
 % CHECK STEP
-% =========================
+% -------------------------
 fprintf('EEG trials: %d\n', EEG.trials);
 fprintf('Response labels: %d\n', length(response_labels));
 fprintf('Condition labels: %d\n', length(condition_labels));
@@ -28,9 +28,9 @@ if EEG.trials ~= length(response_labels) || EEG.trials ~= length(condition_label
     error('Mismatch between EEG trials and label vectors.');
 end
 
-% =========================
+% -------------------------
 % DEFINE 6 CONDITIONS
-% =========================
+% -------------------------
 massed_on  = find(condition_labels == 1 & response_labels == 31);
 massed_imw = find(condition_labels == 1 & response_labels == 32);
 massed_umw = find(condition_labels == 1 & response_labels == 33);
@@ -48,9 +48,9 @@ fprintf('Spaced IMW:     %d\n', length(spaced_imw));
 fprintf('Spaced UMW:     %d\n', length(spaced_umw));
 fprintf('======================\n\n');
 
-% =========================
+% -------------------------
 % CHANNEL INDICES
-% =========================
+% -------------------------
 Fz_index  = find(strcmp({EEG.chanlocs.labels}, 'Fz'));
 FCz_index = find(strcmp({EEG.chanlocs.labels}, 'FCz'));
 Pz_index  = find(strcmp({EEG.chanlocs.labels}, 'Pz'));
@@ -59,9 +59,9 @@ POz_index = find(strcmp({EEG.chanlocs.labels}, 'POz'));
 fprintf('Channel indices found: Fz=%d, FCz=%d, Pz=%d, POz=%d\n', ...
     Fz_index, FCz_index, Pz_index, POz_index);
 
-% =========================
+% -------------------------
 % TIME WINDOW: -5 to 0 SEC
-% =========================
+% -------------------------
 fs = EEG.srate;
 
 % EEG.xmin should be -5 and EEG.xmax should be +7 for my epoched dataset
@@ -72,9 +72,9 @@ time_idx = find(timevec >= -5 & timevec <= 0);
 
 fprintf('Selected %d time points for -5 to 0 sec window\n', length(time_idx));
 
-% =========================
-% HELPER: COMPUTE POWER FOR A CONDITION
-% =========================
+% -------------------------
+% COMPUTE POWER FOR A CONDITION
+% -------------------------
 % Lets store NaN if a condition has 0 trials
 theta = struct();
 alpha = struct();
@@ -125,18 +125,18 @@ for c = 1:length(condition_names)
         cond_name, theta_val, alpha_val);
 end
 
-% =========================
+% -------------------------
 % DISPLAY RESULTS
-% =========================
+% -------------------------
 fprintf('\n==== FINAL THETA RESULTS ====\n');
 disp(theta)
 
 fprintf('\n==== FINAL ALPHA RESULTS ====\n');
 disp(alpha)
 
-% =========================
+% -------------------------
 % SAVE RESULTS
-% =========================
+% -------------------------
 save('JD0802_theta_alpha_results.mat', 'theta', 'alpha', ...
      'massed_on', 'massed_imw', 'massed_umw', ...
      'spaced_on', 'spaced_imw', 'spaced_umw');
