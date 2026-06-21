@@ -59,7 +59,7 @@ save('JD0802_labels.mat', 'response_labels', 'condition_labels');
 
 
 
-
+% ------- the following script is for one participant whose block data was collected in separate files ----- 
 clearvars;
 clc;
 
