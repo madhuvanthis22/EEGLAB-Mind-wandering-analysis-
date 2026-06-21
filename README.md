@@ -1,5 +1,5 @@
 # Mind-Wandering EEG Analysis Pipeline
-This repository contains the MATLAB analysis scripts used in my MSc Cognitive Science thesis investigating the relationship between attentional state, mind-wandering, and learning under massed and spaced learning conditions.
+This repository contains the MATLAB analysis scripts used in my MSc Cognitive Science thesis investigating the relationship between attentional state, mind-wandering, and learning under massed and spaced learning conditions. The study examined neural correlates of attentional engagement and mind-wandering during massed and spaced learning using EEG.
 The EEG preprocessing and ICA stages were performed manually in EEGLAB for each participant. The scripts included in this repository correspond to the analysis stage that followed preprocessing and were used to organise trials, create condition-specific datasets, and extract alpha and theta power measures for statistical analysis.
 
 ## Overview of the Analysis Pipeline
