@@ -18,7 +18,7 @@ EEG = eeg_checkset(EEG);
 load(label_file, 'response_labels', 'condition_labels');
 
 % =========================
-% SANITY CHECK
+% CHECK STEP
 % =========================
 fprintf('EEG trials: %d\n', EEG.trials);
 fprintf('Response labels: %d\n', length(response_labels));
@@ -64,7 +64,7 @@ fprintf('Channel indices found: Fz=%d, FCz=%d, Pz=%d, POz=%d\n', ...
 % =========================
 fs = EEG.srate;
 
-% EEG.xmin should be -5 and EEG.xmax should be +7 for your epoched dataset
+% EEG.xmin should be -5 and EEG.xmax should be +7 for my epoched dataset
 fprintf('Epoch limits: xmin = %.3f sec, xmax = %.3f sec\n', EEG.xmin, EEG.xmax);
 
 timevec = linspace(EEG.xmin, EEG.xmax, EEG.pnts);
@@ -75,7 +75,7 @@ fprintf('Selected %d time points for -5 to 0 sec window\n', length(time_idx));
 % =========================
 % HELPER: COMPUTE POWER FOR A CONDITION
 % =========================
-% We'll store NaN if a condition has 0 trials
+% Lets store NaN if a condition has 0 trials
 theta = struct();
 alpha = struct();
 
