@@ -63,17 +63,17 @@ save('JD0802_labels.mat', 'response_labels', 'condition_labels');
 clearvars;
 clc;
 
-% =========================
+% -------------------------
 % FILES
-% =========================
-participant = 'ST2604';   % change this
+% -------------------------
+participant = 'ST2604';   
 
 continuous_file_block1 = 'ST2604_block1_preprocessed.bdf.set';
 continuous_file_block2 = 'ST2604_block2_preprocessed.bdf.set';
 
-% =========================
+% -------------------------
 % GENERATE LABELS FOR BLOCK 1
-% =========================
+% -------------------------
 EEG = pop_loadset('filename', continuous_file_block1);
 
 for i = 1:length(EEG.event)
@@ -113,9 +113,9 @@ fprintf('\nBlock 1 probes: %d\n', n_probes);
 fprintf('Block 1 missing responses: %d\n', sum(isnan(response_labels_b1)));
 fprintf('Block 1 missing conditions: %d\n', sum(isnan(condition_labels_b1)));
 
-% =========================
+% -------------------------
 % GENERATE LABELS FOR BLOCK 2
-% =========================
+% -------------------------
 EEG = pop_loadset('filename', continuous_file_block2);
 
 for i = 1:length(EEG.event)
@@ -155,9 +155,9 @@ fprintf('\nBlock 2 probes: %d\n', n_probes);
 fprintf('Block 2 missing responses: %d\n', sum(isnan(response_labels_b2)));
 fprintf('Block 2 missing conditions: %d\n', sum(isnan(condition_labels_b2)));
 
-% =========================
+% -------------------------
 % COMBINE LABELS
-% =========================
+% -------------------------
 response_labels  = [response_labels_b1; response_labels_b2];
 condition_labels = [condition_labels_b1; condition_labels_b2];
 
