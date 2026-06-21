@@ -14,7 +14,7 @@ EEG = eeg_checkset(EEG);
 % -------- LOAD LABELS --------
 load(label_file, 'response_labels', 'condition_labels');
 
-% -------- SANITY CHECK --------
+% -------- CHECK --------
 fprintf('EEG trials: %d\n', EEG.trials);
 fprintf('Response labels: %d\n', length(response_labels));
 fprintf('Condition labels: %d\n', length(condition_labels));
@@ -42,7 +42,7 @@ fprintf('Spaced IMW:     %d\n', length(spaced_imw));
 fprintf('Spaced UMW:     %d\n', length(spaced_umw));
 fprintf('======================\n\n');
 
-% -------- SAFE SPLITTING --------
+% -------- SPLITTING --------
 
 if isempty(massed_on)
     fprintf('[INFO] JD0802_massed_on.set → 0 trials (NOT saved)\n');
@@ -94,7 +94,7 @@ end
 
 fprintf('\nAll splitting complete.\n');
 
-% --------------
+% -------- 
 
 clearvars;
 clc;
