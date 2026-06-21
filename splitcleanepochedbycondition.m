@@ -94,7 +94,7 @@ end
 
 fprintf('\nAll splitting complete.\n');
 
-% -------- 
+% -------- the following script is for one participant whose block data was collected in separate files ----- 
 
 clearvars;
 clc;
@@ -138,34 +138,34 @@ pop_saveset(EEG, 'filename', 'ST2604_epochedandcleanedwithICA_COMBINED.set');
 fprintf('\nSaved combined clean epoched dataset.\n');
 
 
-% --------------
+% ------ the following script is for one participant whose block data was collected in separate files ----- 
 
 clearvars;
 clc;
 
 
-% =========================
+% -------------------------
 % FILE NAMES
-% =========================
+% -------------------------
 epoched_file = 'ST2604_epochedandcleanedwithICA_COMBINED.set';
 label_file   = 'ST2604_labels.mat';
 
-% =========================
+% -------------------------
 % LOAD COMBINED CLEAN EPOCHED DATASET
-% =========================
+% -------------------------
 EEG = pop_loadset('filename', epoched_file);
 
 EEG.icaact = [];
 EEG = eeg_checkset(EEG);
 
-% =========================
+% -------------------------
 % LOAD COMBINED LABELS
-% =========================
+% -------------------------
 load(label_file, 'response_labels', 'condition_labels');
 
-% =========================
-% SANITY CHECK
-% =========================
+% -------------------------
+% CHECK
+% -------------------------
 fprintf('EEG trials: %d\n', EEG.trials);
 fprintf('Response labels: %d\n', length(response_labels));
 fprintf('Condition labels: %d\n', length(condition_labels));
@@ -174,9 +174,9 @@ if EEG.trials ~= length(response_labels) || EEG.trials ~= length(condition_label
     error('Mismatch between EEG trials and label vectors.');
 end
 
-% =========================
+% -------------------------
 % DEFINE 6 CONDITION INDICES
-% =========================
+% -------------------------
 massed_on  = find(condition_labels == 1 & response_labels == 31);
 massed_imw = find(condition_labels == 1 & response_labels == 32);
 massed_umw = find(condition_labels == 1 & response_labels == 33);
@@ -185,9 +185,9 @@ spaced_on  = find(condition_labels == 2 & response_labels == 31);
 spaced_imw = find(condition_labels == 2 & response_labels == 32);
 spaced_umw = find(condition_labels == 2 & response_labels == 33);
 
-% =========================
+% -------------------------
 % PRINT COUNTS
-% =========================
+% -------------------------
 fprintf('\n==== Trial Counts ====\n');
 fprintf('Massed On-task: %d\n', length(massed_on));
 fprintf('Massed IMW:     %d\n', length(massed_imw));
@@ -197,9 +197,9 @@ fprintf('Spaced IMW:     %d\n', length(spaced_imw));
 fprintf('Spaced UMW:     %d\n', length(spaced_umw));
 fprintf('======================\n\n');
 
-% =========================
-% SAFE SPLITTING
-% =========================
+% -------------------------
+% SPLITTING
+% -------------------------
 
 if isempty(massed_on)
     fprintf('[INFO] ST2604_massed_on.set → 0 trials (NOT saved)\n');
